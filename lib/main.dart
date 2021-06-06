@@ -48,16 +48,19 @@ class HomeRoute extends StatelessWidget {
   }
 }
 
+
+ExpenseEntries recentEntryList = ExpenseEntries();
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
   void initState() {
-    entryList.initData(
-        'SELECT TOP 5 * FROM (SELECT * FROM entries ORDER BY id DESC)');
+    recentEntryList.getRecentData(5);
     super.initState();
   }
 
@@ -141,22 +144,22 @@ class _HomePageState extends State<HomePage> {
               decoration: BoxDecoration(
                 color: Color.fromRGBO(20, 61, 89, 30),
               ),
-              // child: DataTable(
-              //   headingTextStyle: TextStyle(
-              //     color: Color.fromRGBO(244, 180, 26, 1),
-              //     fontWeight: FontWeight.bold,
-              //   ),
-              //   dataTextStyle: TextStyle(
-              //     color: Color.fromRGBO(244, 180, 26, 1),
-              //   ),
-              //   showBottomBorder: true,
-              //   columns: [
-              //     DataColumn(label: Text('Item')),
-              //     DataColumn(label: Text('Cost')),
-              //     DataColumn(label: Text('Date')),
-              //   ],
-              //   rows: wrapDataForDisplay(entryList.listOfEntries),
-              // ),
+              child: DataTable(
+                headingTextStyle: TextStyle(
+                  color: Color.fromRGBO(244, 180, 26, 1),
+                  fontWeight: FontWeight.bold,
+                ),
+                dataTextStyle: TextStyle(
+                  color: Color.fromRGBO(244, 180, 26, 1),
+                ),
+                showBottomBorder: true,
+                columns: [
+                  DataColumn(label: Text('Item')),
+                  DataColumn(label: Text('Cost')),
+                  DataColumn(label: Text('Date')),
+                ],
+                rows: wrapDataForDisplay(recentEntryList.listOfEntries),
+              ),
             ),
           ),
           Expanded(
@@ -397,7 +400,11 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
                           ),
                         );
 
-                        print(await listEntries());
+                        // print(await listEntries());
+                        entryList.initData('select * from entries');
+                        print(entryList.listOfEntries);
+                        recentEntryList.getRecentData(5);
+                        print(recentEntryList.listOfEntries);
 
                         Navigator.pop(context);
                       }
@@ -602,30 +609,28 @@ class _ListExpensePageState extends State<ListExpensePage> {
               leftHandSideColBackgroundColor: Color.fromRGBO(244, 180, 26, 1),
               rightHandSideColBackgroundColor: Color.fromRGBO(244, 180, 26, 1),
               verticalScrollbarStyle: const ScrollbarStyle(
-                isAlwaysShown: true,
-                thickness: 4.0,
+                isAlwaysShown: false,
+                thickness: 5.0,
                 radius: Radius.circular(5.0),
+                thumbColor: Color.fromRGBO(20, 61, 89, 0.5),
               ),
               horizontalScrollbarStyle: const ScrollbarStyle(
-                isAlwaysShown: true,
-                thickness: 4.0,
+                isAlwaysShown: false,
+                thickness: 5.0,
                 radius: Radius.circular(5.0),
+                thumbColor: Color.fromRGBO(20, 61, 89, 0.5),
               ),
-              enablePullToRefresh: true,
-              refreshIndicator: const WaterDropHeader(),
-              refreshIndicatorHeight: 30,
-              onRefresh: () async {
-                await Future.delayed(const Duration(milliseconds: 200));
-                _hdtRefreshController.refreshCompleted();
-              },
-              htdRefreshController: _hdtRefreshController,
+              enablePullToRefresh: false,
+              // refreshIndicator: const WaterDropHeader(),
+              // refreshIndicatorHeight: 30,
+              // onRefresh: () async {
+              //   await Future.delayed(const Duration(milliseconds: 200));
+              //   _hdtRefreshController.refreshCompleted();
+              // },
+              // htdRefreshController: _hdtRefreshController,
             ),
             height: MediaQuery.of(context).size.height,
           ),
-        ),
-        Expanded(
-          flex: 1,
-          child: SizedBox(),
         ),
       ],
     );

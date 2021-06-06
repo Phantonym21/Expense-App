@@ -43,6 +43,11 @@ class ExpenseEntries {
       return (aAmt - bAmt).floor() * (isAscending ? 1 : -1);
     });
   }
+
+  getRecentData(int numRecords) async {
+    String query = 'SELECT * FROM entries ORDER BY datetime DESC LIMIT $numRecords';
+    this.listOfEntries = await listEntriesByQuery(query);
+  }
 }
 
 Future<Database> getDatabase() async {
