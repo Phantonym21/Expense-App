@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:track_expense_app/design_utils.dart';
 
 class FormInputCard extends StatefulWidget {
   final String labelText;
   final controller;
   final validator;
+  final RGBColor textColor;
   final Widget fieldIcon;
 
   FormInputCard(
@@ -11,6 +13,7 @@ class FormInputCard extends StatefulWidget {
       @required this.labelText,
       @required this.controller,
       @required this.validator,
+      @required this.textColor,
       @optionalTypeArgs this.fieldIcon})
       : super(key: key);
 
@@ -39,7 +42,8 @@ class _FormInputCardState extends State<FormInputCard> {
                     child: Text(
                       widget.labelText,
                       style: TextStyle(
-                        color: Color.fromRGBO(20, 61, 89, 30),
+                        color: Color.fromRGBO(widget.textColor.R,
+                            widget.textColor.G, widget.textColor.B, 1),
                         fontFamily: 'Hallo sans',
                         fontSize: 25,
                         fontWeight: FontWeight.bold,

@@ -8,6 +8,10 @@ import 'form_input_card.dart';
 import 'package:horizontal_data_table/horizontal_data_table.dart';
 // import 'package:table_sticky_headers/table_sticky_headers.dart';
 import 'package:intl/intl.dart';
+import 'design_utils.dart';
+import 'globals.dart';
+
+List<RGBColor> themeColor = themeColorDict['whiteSafetyOrange'];
 
 void main() {
   runApp(ExpenseApp());
@@ -28,12 +32,14 @@ class HomeRoute extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(20, 61, 89, 30),
+        backgroundColor: Color.fromRGBO(
+            themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
         title: Center(
           child: Text(
             'Your Expenses',
             style: TextStyle(
-              color: Color.fromRGBO(244, 180, 26, 1),
+              color: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               fontFamily: 'Hallo sans',
               fontWeight: FontWeight.bold,
               fontSize: 25,
@@ -48,7 +54,6 @@ class HomeRoute extends StatelessWidget {
   }
 }
 
-
 ExpenseEntries recentEntryList = ExpenseEntries();
 
 class HomePage extends StatefulWidget {
@@ -57,7 +62,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   @override
   void initState() {
     recentEntryList.getRecentData(5);
@@ -67,7 +71,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromRGBO(244, 180, 26, 1),
+      color:
+          Color.fromRGBO(themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -75,14 +80,16 @@ class _HomePageState extends State<HomePage> {
             flex: 10,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(244, 180, 26, 1),
+                color: Color.fromRGBO(
+                    themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               ),
             ),
           ),
           Expanded(
             flex: 2,
             child: Container(
-              color: Color.fromRGBO(244, 180, 26, 1),
+              color: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               child: Row(
                 children: [
                   Expanded(
@@ -91,12 +98,12 @@ class _HomePageState extends State<HomePage> {
                       padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                       // alignment: Alignment.center,
                       child: Text(
-
                         'Recent Expenses',
                         style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color.fromRGBO(20, 61, 89, 30),
+                          color: Color.fromRGBO(themeColor[1].R,
+                              themeColor[1].G, themeColor[1].B, 30),
                           fontFamily: 'Hallo sans',
                         ),
                       ),
@@ -110,7 +117,8 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton(
                         // autofocus: true,
                         style: ElevatedButton.styleFrom(
-                          primary: Color.fromRGBO(20, 61, 89, 30),
+                          primary: Color.fromRGBO(themeColor[1].R,
+                              themeColor[1].G, themeColor[1].B, 30),
                         ),
                         onPressed: () {
                           Navigator.push(
@@ -125,7 +133,8 @@ class _HomePageState extends State<HomePage> {
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromRGBO(244, 180, 26, 1),
+                              color: Color.fromRGBO(themeColor[0].R,
+                                  themeColor[0].G, themeColor[0].B, 1),
                               fontFamily: 'Hallo sans',
                             ),
                           ),
@@ -142,24 +151,25 @@ class _HomePageState extends State<HomePage> {
             flex: 10,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(20, 61, 89, 30),
+                color: Color.fromRGBO(
+                    themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
               ),
-              child: DataTable(
-                headingTextStyle: TextStyle(
-                  color: Color.fromRGBO(244, 180, 26, 1),
-                  fontWeight: FontWeight.bold,
-                ),
-                dataTextStyle: TextStyle(
-                  color: Color.fromRGBO(244, 180, 26, 1),
-                ),
-                showBottomBorder: true,
-                columns: [
-                  DataColumn(label: Text('Item')),
-                  DataColumn(label: Text('Cost')),
-                  DataColumn(label: Text('Date')),
-                ],
-                rows: wrapDataForDisplay(recentEntryList.listOfEntries),
-              ),
+              // child: DataTable(
+              //   headingTextStyle: TextStyle(
+              //     color: Color.fromRGBO(themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              //   dataTextStyle: TextStyle(
+              //     color: Color.fromRGBO(themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
+              //   ),
+              //   showBottomBorder: true,
+              //   columns: [
+              //     DataColumn(label: Text('Item')),
+              //     DataColumn(label: Text('Cost')),
+              //     DataColumn(label: Text('Date')),
+              //   ],
+              //   rows: wrapDataForDisplay(recentEntryList.listOfEntries),
+              // ),
             ),
           ),
           Expanded(
@@ -178,7 +188,8 @@ class _HomePageState extends State<HomePage> {
                   flex: 1,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(20, 61, 89, 30),
+                      primary: Color.fromRGBO(themeColor[1].R, themeColor[1].G,
+                          themeColor[1].B, 30),
                       shape: CircleBorder(),
                     ),
                     onPressed: () {
@@ -192,7 +203,8 @@ class _HomePageState extends State<HomePage> {
                       child: Text(
                         '+',
                         style: TextStyle(
-                          color: Color.fromRGBO(244, 180, 26, 1),
+                          color: Color.fromRGBO(themeColor[0].R,
+                              themeColor[0].G, themeColor[0].B, 1),
                           fontFamily: 'Hallo sans',
                           fontSize: 50,
                           fontWeight: FontWeight.bold,
@@ -237,12 +249,14 @@ class AddExpenseRoute extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(20, 61, 89, 30),
+        backgroundColor: Color.fromRGBO(
+            themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
         title: Center(
           child: Text(
             'Add Expense',
             style: TextStyle(
-              color: Color.fromRGBO(244, 180, 26, 1),
+              color: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               fontFamily: 'Hallo sans',
               fontWeight: FontWeight.bold,
               fontSize: 25,
@@ -267,7 +281,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromRGBO(244, 180, 26, 1),
+      color:
+          Color.fromRGBO(themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -275,7 +290,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(244, 180, 26, 1),
+                color: Color.fromRGBO(
+                    themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               ),
             ),
           ),
@@ -283,7 +299,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
             flex: 6,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(244, 180, 26, 1),
+                color: Color.fromRGBO(
+                    themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               ),
               child: AddExpenseForm(),
             ),
@@ -292,7 +309,8 @@ class _AddExpensePageState extends State<AddExpensePage> {
             flex: 1,
             child: Container(
               decoration: BoxDecoration(
-                color: Color.fromRGBO(244, 180, 26, 1),
+                color: Color.fromRGBO(
+                    themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               ),
             ),
           ),
@@ -325,6 +343,7 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
             flex: 2,
             child: FormInputCard(
               labelText: 'Spent on',
+              textColor: themeColor[1],
               controller: itemController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -342,6 +361,7 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
             flex: 2,
             child: FormInputCard(
               labelText: 'How much',
+              textColor: themeColor[1],
               controller: amtController,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -353,7 +373,8 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
               },
               fieldIcon: Icon(
                 Icons.attach_money,
-                color: Color.fromRGBO(20, 61, 89, 30),
+                color: Color.fromRGBO(
+                    themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
               ),
             ),
           ),
@@ -365,6 +386,7 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
             flex: 2,
             child: FormInputCard(
               labelText: 'Description',
+              textColor: themeColor[1],
               controller: descController,
               validator: (value) {
                 return null;
@@ -384,7 +406,8 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
                   flex: 6,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      primary: Color.fromRGBO(20, 61, 89, 30),
+                      primary: Color.fromRGBO(themeColor[1].R, themeColor[1].G,
+                          themeColor[1].B, 30),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
@@ -412,7 +435,8 @@ class _AddExpenseFormState extends State<AddExpenseForm> {
                     child: Text(
                       'Add Entry',
                       style: TextStyle(
-                        color: Color.fromRGBO(244, 180, 26, 1),
+                        color: Color.fromRGBO(themeColor[0].R, themeColor[0].G,
+                            themeColor[0].B, 1),
                         fontFamily: 'Hallo sans',
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -436,12 +460,14 @@ class ListExpenseRoute extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(20, 61, 89, 30),
+        backgroundColor: Color.fromRGBO(
+            themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
         title: Center(
           child: Text(
             'All Expenses',
             style: TextStyle(
-              color: Color.fromRGBO(244, 180, 26, 1),
+              color: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
               fontFamily: 'Hallo sans',
               fontWeight: FontWeight.bold,
               fontSize: 25,
@@ -488,7 +514,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
         Expanded(
           flex: 1,
           child: Container(
-            color: Color.fromRGBO(20, 61, 89, 30),
+            color: Color.fromRGBO(
+                themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
             child: Row(
               children: <Widget>[
                 Expanded(
@@ -502,7 +529,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 17,
-                        color: Color.fromRGBO(244, 180, 26, 1),
+                        color: Color.fromRGBO(themeColor[0].R, themeColor[0].G,
+                            themeColor[0].B, 1),
                       ),
                     ),
                   ),
@@ -513,18 +541,21 @@ class _ListExpensePageState extends State<ListExpensePage> {
                     // padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                     child: DropdownButton<String>(
                       value: amtDropDownValue,
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_drop_down,
-                        color: Color.fromRGBO(244, 180, 26, 1),
+                        color: Color.fromRGBO(themeColor[0].R, themeColor[0].G,
+                            themeColor[0].B, 1),
                       ),
-                      style: const TextStyle(
-                        color: Color.fromRGBO(244, 180, 26, 1),
+                      style: TextStyle(
+                        color: Color.fromRGBO(themeColor[0].R, themeColor[0].G,
+                            themeColor[0].B, 1),
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
                       underline: Container(
                         height: 1,
-                        color: Color.fromRGBO(244, 180, 26, 1),
+                        color: Color.fromRGBO(themeColor[0].R, themeColor[0].G,
+                            themeColor[0].B, 1),
                       ),
                       onChanged: (String newValue) {
                         amtDropDownValue = newValue;
@@ -558,18 +589,21 @@ class _ListExpensePageState extends State<ListExpensePage> {
                           contentPadding: EdgeInsets.fromLTRB(0, 20, 0, 5),
                           enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromRGBO(244, 180, 26, 1),
+                              color: Color.fromRGBO(themeColor[0].R,
+                                  themeColor[0].G, themeColor[0].B, 1),
                             ),
                           ),
                           focusedBorder: UnderlineInputBorder(
                             borderSide: BorderSide(
-                              color: Color.fromRGBO(244, 180, 26, 1),
+                              color: Color.fromRGBO(themeColor[0].R,
+                                  themeColor[0].G, themeColor[0].B, 1),
                             ),
                           ),
                         ),
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Color.fromRGBO(244, 180, 26, 1),
+                          color: Color.fromRGBO(themeColor[0].R,
+                              themeColor[0].G, themeColor[0].B, 1),
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
                         ),
@@ -601,24 +635,29 @@ class _ListExpensePageState extends State<ListExpensePage> {
               leftSideItemBuilder: _generateFirstColumnRow,
               rightSideItemBuilder: _generateRightHandSideColumnRow,
               itemCount: entryList.listOfEntries.length,
-              rowSeparatorWidget: const Divider(
-                color: Color.fromRGBO(20, 61, 89, 30),
+              rowSeparatorWidget: Divider(
+                color: Color.fromRGBO(
+                    themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
                 height: 2.0,
                 thickness: 2.0,
               ),
-              leftHandSideColBackgroundColor: Color.fromRGBO(244, 180, 26, 1),
-              rightHandSideColBackgroundColor: Color.fromRGBO(244, 180, 26, 1),
-              verticalScrollbarStyle: const ScrollbarStyle(
+              leftHandSideColBackgroundColor: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
+              rightHandSideColBackgroundColor: Color.fromRGBO(
+                  themeColor[0].R, themeColor[0].G, themeColor[0].B, 1),
+              verticalScrollbarStyle: ScrollbarStyle(
                 isAlwaysShown: false,
                 thickness: 5.0,
                 radius: Radius.circular(5.0),
-                thumbColor: Color.fromRGBO(20, 61, 89, 0.5),
+                thumbColor: Color.fromRGBO(
+                    themeColor[1].R, themeColor[1].G, themeColor[1].B, 0.5),
               ),
-              horizontalScrollbarStyle: const ScrollbarStyle(
+              horizontalScrollbarStyle: ScrollbarStyle(
                 isAlwaysShown: false,
                 thickness: 5.0,
                 radius: Radius.circular(5.0),
-                thumbColor: Color.fromRGBO(20, 61, 89, 0.5),
+                thumbColor: Color.fromRGBO(
+                    themeColor[1].R, themeColor[1].G, themeColor[1].B, 0.5),
               ),
               enablePullToRefresh: false,
               // refreshIndicator: const WaterDropHeader(),
@@ -675,7 +714,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
         style: TextStyle(
           fontSize: 17.0,
           fontWeight: FontWeight.bold,
-          color: Color.fromRGBO(20, 61, 89, 30),
+          color: Color.fromRGBO(
+              themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
         ),
       ),
       width: width,
@@ -696,7 +736,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
         dateFormatted,
         style: TextStyle(
           fontSize: 17.0,
-          color: Color.fromRGBO(20, 61, 89, 30),
+          color: Color.fromRGBO(
+              themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
         ),
       ),
       width: 100,
@@ -714,7 +755,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
             entryList.listOfEntries[index].item,
             style: TextStyle(
               fontSize: 17.0,
-              color: Color.fromRGBO(20, 61, 89, 30),
+              color: Color.fromRGBO(
+                  themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
             ),
           ),
           width: 200,
@@ -727,7 +769,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
             entryList.listOfEntries[index].amt.toString(),
             style: TextStyle(
               fontSize: 17.0,
-              color: Color.fromRGBO(20, 61, 89, 30),
+              color: Color.fromRGBO(
+                  themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
             ),
           ),
           width: 100,
@@ -740,7 +783,8 @@ class _ListExpensePageState extends State<ListExpensePage> {
             entryList.listOfEntries[index].desc,
             style: TextStyle(
               fontSize: 17.0,
-              color: Color.fromRGBO(20, 61, 89, 30),
+              color: Color.fromRGBO(
+                  themeColor[1].R, themeColor[1].G, themeColor[1].B, 30),
             ),
           ),
           width: 500,
