@@ -27,6 +27,24 @@ class ExpenseEntry {
   }
 }
 
+class ExpenseEntries {
+  List<ExpenseEntry> listOfEntries = [];
+
+  ExpenseEntries({this.listOfEntries});
+
+  initData(String query) async {
+    this.listOfEntries = await listEntriesByQuery(query);
+  }
+
+  void sortAmount(bool isAscending) {
+    listOfEntries.sort((a, b) {
+      double aAmt = a.amt ?? 0;
+      double bAmt = b.amt ?? 0;
+      return (aAmt - bAmt).floor() * (isAscending ? 1 : -1);
+    });
+  }
+}
+
 Future<Database> getDatabase() async {
   final Future<Database> database = openDatabase(
     join(await getDatabasesPath(), 'expense_entries.db'),
@@ -67,4 +85,19 @@ Future<int> getDatabaseSize() async {
   final List<Map<String, dynamic>> maps = await db.query('entries');
 
   return maps.length;
+}
+
+Future<List<ExpenseEntry>> listEntriesByQuery(String query) async {
+  final Database db = await getDatabase();
+  final List<Map<String, dynamic>> maps = await db.rawQuery(query);
+
+  return List.generate(maps.length, (i) {
+    return ExpenseEntry(
+      id: maps[i]['id'],
+      datetime: maps[i]['datetime'],
+      item: maps[i]['item'],
+      amt: maps[i]['amt'],
+      desc: maps[i]['desc'],
+    );
+  });
 }
